@@ -1,5 +1,4 @@
-const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   entry: __dirname + "/src/index.jsx",
@@ -16,18 +15,17 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            "css-loader",
-            "sass-loader"
-          ]
-        })
+        use: [
+          // fallback to style-loader in development
+          process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader"
+        ]
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: "bundle.css"
     })
   ],

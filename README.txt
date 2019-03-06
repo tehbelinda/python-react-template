@@ -1,3 +1,11 @@
+Initial server setup
+```
+cd server
+virtualenv .
+source bin/activate
+pip install -r requirements.txt
+```
+
 Run python server using virtualenv
 ```
 source server/bin/activate
